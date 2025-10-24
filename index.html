@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>दृष्टि BPSC☺️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        
+        /* Homepage Styles */
+        .homepage {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            transition: opacity 0.5s ease;
+            position: relative;
+        }
+        
+        .butterfly-decoration {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .butterfly-1 {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .butterfly-2 {
+            top: 15%;
+            right: 15%;
+            animation-delay: 1s;
+        }
+        
+        .butterfly-3 {
+            bottom: 25%;
+            left: 15%;
+            animation-delay: 2s;
+        }
+        
+        .butterfly-4 {
+            bottom: 20%;
+            right: 10%;
+            animation-delay: 1.5s;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .homepage h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .homepage p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .start-btn {
+            background: linear-gradient(45deg, #FF6B6B, #FF8E53);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .start-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+        
+        .start-btn:hover::before {
+            left: 100%;
+        }
+        
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Notification Page Styles */
+        .notification-page {
+            display: none;
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .notification-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #FF6B6B, #4CAF50, #0088cc);
+        }
+        
+        .notification-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 15px;
+        }
+        
+        .notification-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+            color: #FF9800;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .notification-title {
+            font-size: 1.8rem;
+            color: #333;
+            background: linear-gradient(45deg, #FF6B6B, #FF9800);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .telegram-link {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(45deg, #0088cc, #00aced);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin: 20px 0;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 136, 204, 0.3);
+        }
+        
+        .telegram-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 136, 204, 0.4);
+        }
+        
+        .notification-content {
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        .section-title {
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            color: #333;
+            border-left: 4px solid #4CAF50;
+            padding-left: 10px;
+            position: relative;
+        }
+        
+        .do-list, .dont-list {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .do-list li, .dont-list li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 10px;
+        }
+        
+        .do-list li::before {
+            content: "✅";
+            position: absolute;
+            left: -25px;
+        }
+        
+        .dont-list li::before {
+            content: "❌";
+            position: absolute;
+            left: -25px;
+        }
+        
+        .warning {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+            position: relative;
+        }
+        
+        .warning::before {
+            content: "⚠️";
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .signature {
+            text-align: right;
+            margin-top: 30px;
+            font-style: italic;
+            color: #666;
+            padding: 10px;
+            border-top: 1px dashed #ddd;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .homepage h1 {
+                font-size: 2.5rem;
+            }
+            
+            .notification-page {
+                margin: 20px;
+                padding: 20px;
+            }
+            
+            .notification-title {
+                font-size: 1.5rem;
+            }
+            
+            .butterfly-decoration {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .homepage h1 {
+                font-size: 2rem;
+            }
+            
+            .homepage p {
+                font-size: 1rem;
+            }
+            
+            .start-btn {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+            
+            .butterfly-decoration {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Homepage with attractive picture -->
+    <section class="homepage" id="homepage">
+        <div class="butterfly-decoration butterfly-1">🦋</div>
+        <div class="butterfly-decoration butterfly-2">🦋</div>
+        <div class="butterfly-decoration butterfly-3">🦋</div>
+        <div class="butterfly-decoration butterfly-4">🦋</div>
+        
+        <h1>🦋दृष्टि BPSC🦋 में आपका स्वागत है</h1>
+        <p>बटन को क्लिक कीजिए और दिए गए नोटिफिकेशन को ध्यान से पढ़ें</p>
+        <button class="start-btn" id="startBtn">🐬Enter🐬</button>
+    </section>
+    
+    <!-- Notification Page -->
+    <section class="notification-page" id="notificationPage">
+        <div class="notification-header">
+            <div class="notification-icon">📢</div>
+            <h2 class="notification-title">महत्वपूर्ण सूचना</h2>
+        </div>
+        
+        <a href="https://t.me/dristi_bpsc" class="telegram-link" target="_blank">🔥@dristi_bpsc 🔥- हमारे टेलीग्राम चैनल से जुड़ें</a>
+        
+        <div class="notification-content">
+            <p>कृपया निम्नलिखित जानकारी ध्यान से पढ़ें</p>
+            
+            <h3 class="section-title">🇮🇳 हिंदी</h3>
+            
+            <h4 class="section-title">📂 ग्रुप में क्या भेजें:</h4>
+            <ul class="do-list">
+                <li>PDF study related 😎</li>
+                <li>Notes 📚</li>
+                <li>any information 👌</li>
+            </ul>
+            
+            <h4 class="section-title">❌ ग्रुप में क्या न भेजें:</h4>
+            <ul class="dont-list">
+                <li>कोई link न भेजे ❌</li>
+                <li>Top पर Forwarded लिखा messages न भेजे</li>
+            </ul>
+            
+            <div class="warning">
+                ⚠️ ध्यान दें: बात न मानने पर आपका संदेश भेजने के बाद अपने-आप डिलीट हो जाएगा।😎
+            </div>
+            
+            <p>🙏 कृपया नियमों का पालन करें और अपनी जानकारी सुरक्षित रखें। ✅</p>
+            
+            <div class="signature">
+                आपका शुभचिंतक, ABHI 🥰
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('startBtn').addEventListener('click', function() {
+            // Hide homepage
+            document.getElementById('homepage').style.display = 'none';
+            
+            // Show notification page
+            document.getElementById('notificationPage').style.display = 'block';
+            
+            // Scroll to top of notification page
+            window.scrollTo(0, 0);
+        });
+    </script>
+</body>
+</html>

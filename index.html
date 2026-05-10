@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>दृष्टि BPSC | मास्टरपीस एडिशन</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Poppins', 'Inter', system-ui, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(circle at 20% 30%, #0b1120, #030617);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+            cursor: default;
+        }
+
+        /* animated background orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.35;
+            animation: floatBlob 18s infinite alternate;
+            z-index: 0;
+        }
+
+        .orb1 { width: 400px; height: 400px; background: #ff6b6b; top: -150px; left: -100px; }
+        .orb2 { width: 500px; height: 500px; background: #4c9aff; bottom: -200px; right: -150px; animation-duration: 22s; }
+        .orb3 { width: 350px; height: 350px; background: #f0a34b; top: 40%; right: 10%; animation-duration: 15s; }
+
+        @keyframes floatBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(60px, -40px) scale(1.2); }
+        }
+
+        /* main container */
+        .master-container {
+            width: 95%;
+            max-width: 1300px;
+            margin: 30px auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* HOMEPAGE CARD 3D + GLASS */
+        .homepage {
+            background: rgba(15, 25, 45, 0.55);
+            backdrop-filter: blur(16px);
+            border-radius: 64px;
+            border: 1px solid rgba(255, 215, 150, 0.5);
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255,255,255,0.1);
+            padding: 2.8rem 1.8rem;
+            text-align: center;
+            transition: all 0.2s ease;
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+
+        .butterfly-fleet {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            margin-bottom: 20px;
+        }
+
+        .fly {
+            font-size: 3.3rem;
+            filter: drop-shadow(0 0 8px #ffb347);
+            animation: glamFloat 2.8s infinite alternate;
+        }
+        .fly:nth-child(2) { animation-delay: 0.6s; font-size: 3rem; }
+        .fly:nth-child(3) { animation-delay: 1.2s; font-size: 3.6rem; }
+
+        @keyframes glamFloat {
+            0% { transform: translateY(0px) rotate(-2deg); text-shadow: 0 0 0 #ffc285; }
+            100% { transform: translateY(-18px) rotate(4deg); text-shadow: 0 0 15px #ffaa66; }
+        }
+
+        .homepage h1 {
+            font-size: 3.2rem;
+            background: linear-gradient(135deg, #FFE6B0, #FFB347, #FF6B6B, #ffad84);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+            margin: 10px 0;
+        }
+
+        .glow-text {
+            font-size: 1.25rem;
+            background: rgba(0,0,0,0.5);
+            display: inline-block;
+            padding: 8px 28px;
+            border-radius: 40px;
+            color: #ffe3b2;
+            margin-bottom: 35px;
+            font-weight: 500;
+            backdrop-filter: blur(6px);
+        }
+
+        .start-btn {
+            background: linear-gradient(125deg, #ff8c42, #ff3b3b);
+            border: none;
+            padding: 16px 48px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: 60px;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.5);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .start-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 18px 30px #ff6b2b70;
+            letter-spacing: 2px;
+        }
+
+        /* PROCESS SCANNER MODERN */
+        .process-scanner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(2, 6, 23, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .scanner-card {
+            background: linear-gradient(145deg, #111a2e, #07112a);
+            border-radius: 56px;
+            max-width: 450px;
+            width: 85%;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 180, 70, 0.6);
+            box-shadow: 0 0 30px rgba(255, 140, 0, 0.4);
+            transform: scale(0.9);
+            transition: transform 0.25s cubic-bezier(0.2, 1.2, 0.4, 1);
+        }
+
+        .process-scanner.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .process-scanner.active .scanner-card {
+            transform: scale(1);
+        }
+
+        .scan-ring {
+            width: 110px;
+            height: 110px;
+            margin: 10px auto;
+            border: 4px solid rgba(255, 140, 0, 0.3);
+            border-top: 4px solid #ffb347;
+            border-right: 4px solid #ffd966;
+            border-radius: 50%;
+            animation: spinScan 0.7s linear infinite;
+            box-shadow: 0 0 20px #ff9f2e;
+        }
+
+        @keyframes spinScan {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .scanner-text {
+            font-size: 1.7rem;
+            font-weight: bold;
+            background: linear-gradient(120deg, #ffd966, #ffaa44);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 18px 0 6px;
+        }
+
+        .status-detail {
+            color: #b9c7df;
+            font-size: 0.9rem;
+        }
+
+        .progress-glow {
+            background: #1a253c;
+            height: 10px;
+            border-radius: 12px;
+            margin: 20px 0 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill-scan {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #ffaa44, #ff6a3d);
+            border-radius: 12px;
+            transition: width 0.08s linear;
+        }
+
+        /* NOTIFICATION PAGE - glass premium */
+        .notification-premium {
+            display: none;
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 56px;
+            overflow: hidden;
+            box-shadow: 0 35px 60px rgba(0, 0, 0, 0.4);
+            animation: slideGlow 0.55s ease-out;
+            transition: all 0.2s;
+        }
+
+        @keyframes slideGlow {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .notif-top {
+            background: linear-gradient(115deg, #1f2937, #111827);
+            padding: 20px 30px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .telegram-lux {
+            background: #1e88e5;
+            padding: 10px 24px;
+            border-radius: 48px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            gap: 10px;
+            transition: 0.2s;
+        }
+
+        .telegram-lux:hover {
+            background: #0e6cb0;
+            transform: scale(0.96);
+        }
+
+        .content-lux {
+            padding: 32px 38px;
+        }
+
+        .rule-title {
+            font-size: 1.8rem;
+            border-left: 8px solid #f97316;
+            padding-left: 18px;
+            margin: 20px 0 15px;
+        }
+
+        .grid-double {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin: 20px 0;
+        }
+
+        .allow-card, .deny-card {
+            background: #fef9f0;
+            border-radius: 36px;
+            padding: 20px;
+            transition: 0.2s;
+        }
+
+        .deny-card {
+            background: #fff6f0;
+        }
+
+        .allow-card ul, .deny-card ul {
+            list-style: none;
+        }
+
+        .allow-card li, .deny-card li {
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .warning-lux {
+            background: #fffbeb;
+            border-radius: 28px;
+            padding: 18px 26px;
+            border-left: 8px solid #f59e0b;
+            margin: 20px 0;
+        }
+
+        .surprise-btn {
+            background: linear-gradient(145deg, #ffb347, #ff6b4a);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 60px;
+            color: white;
+            font-weight: bold;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .surprise-btn:active {
+            transform: scale(0.96);
+        }
+
+        @media (max-width: 720px) {
+            .grid-double { grid-template-columns: 1fr; }
+            .homepage h1 { font-size: 2rem; }
+            .content-lux { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+
+    <div class="master-container">
+        <!-- HOMEPAGE ENHANCED -->
+        <section class="homepage" id="homepage">
+            <div class="butterfly-fleet">
+                <div class="fly">🦋✨</div>
+                <div class="fly">🦋🌺</div>
+                <div class="fly">🦋🔥</div>
+            </div>
+            <h1>दृष्टि BPSC ☺️🦋</h1>
+            <div class="glow-text">⚡ सुपरफास्ट तैयारी, अनुशासित परिवार ⚡</div>
+            <button class="start-btn" id="mastStartBtn">🌟 प्रवेश का अनुभव 🌟</button>
+            <p style="margin-top: 28px; color: #b9d0ff;">✨ क्लिक करें और जादू देखें ✨</p>
+        </section>
+
+        <!-- MODERN PROCESS (3-4 sec) -->
+        <div class="process-scanner" id="processLayer">
+            <div class="scanner-card">
+                <div class="scan-ring"></div>
+                <div class="scanner-text" id="processTitle">🔐 सुरक्षित चैनल</div>
+                <div class="status-detail" id="processDesc">हाई-स्पीड एन्क्रिप्शन...</div>
+                <div class="progress-glow">
+                    <div class="progress-fill-scan" id="scanProgressFill"></div>
+                </div>
+                <div id="processEmoji" style="font-size: 2rem; margin-top: 12px;">🌀</div>
+            </div>
+        </div>
+
+        <!-- NOTIFICATION PAGE LUXURY -->
+        <section class="notification-premium" id="notificationLux">
+            <div class="notif-top">
+                <div style="display: flex; gap: 12px; align-items: center;">
+                    <span style="font-size: 2.2rem;">🔔⭐</span>
+                    <span style="color: white; font-size: 1.5rem; font-weight: bold;">नियम & सूचना पटल</span>
+                </div>
+                <a href="https://t.me/dristi_bpsc" class="telegram-lux" target="_blank">✈️ @dristi_bpsc | ग्रुप जॉइन करें 🌺</a>
+            </div>
+            <div class="content-lux">
+                <p style="font-size: 1.05rem;">🤝 आपका हार्दिक स्वागत है | कृपया ग्रुप की गरिमा बनाए रखने हेतु नियम पढ़ें:</p>
+                <div class="rule-title">📌 अनिवार्य दिशानिर्देश</div>
+                <div class="grid-double">
+                    <div class="allow-card">
+                        <h3>✅ भेजें ये सामग्री</h3>
+                        <ul>
+                            <li>📚 <strong>Study PDF / Notes</strong></li>
+                            <li>📰 करेंट अफेयर्स / जानकारी</li>
+                            <li>💡 उपयोगी रणनीतियाँ</li>
+                            <li>😇 सहयोगात्मक चर्चा</li>
+                        </ul>
+                    </div>
+                    <div class="deny-card">
+                        <h3>🚫 निषिद्ध क्रियाएँ</h3>
+                        <ul>
+                            <li>🔗 कोई भी बिना अनुमति लिंक</li>
+                            <li>📕 कॉपीराइट वीडियो / कोचिंग लिंक</li>
+                            <li>⏩ "Forwarded" स्पैम</li>
+                            <li>😡 किसी सदस्य से गाली-गलौज</li>
+                            <li>🚨 किसी लड़की को DM करके परेशान करना - <strong style="color:#b91c1c;">बैन</strong></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="warning-lux">
+                    🔥🔥 <strong>अलर्ट:</strong> नियम तोड़ने पर संदेश स्वतः डिलीट + बैन की कार्यवाही। 🙏 कृपया एक सकारात्मक माहौल बनाएं।
+                </div>
+                <div class="signature" style="text-align: right; border-top: 1px dashed #ccc; margin-top: 20px; padding-top: 15px;">
+                    🙏 आपका मार्गदर्शक — <strong>अभिषेक (ABHI)</strong> 🥰
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="surprise-btn" id="easterEggBtn">✨ Click for Surprise ✨</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        (function(){
+            const homepage = document.getElementById('homepage');
+            const notifPanel = document.getElementById('notificationLux');
+            const startTrigger = document.getElementById('mastStartBtn');
+            const processDiv = document.getElementById('processLayer');
+            const progressFillScan = document.getElementById('scanProgressFill');
+            const processTitleSpan = document.getElementById('processTitle');
+            const processDescSpan = document.getElementById('processDesc');
+            const processEmojiSpan = document.getElementById('processEmoji');
+
+            // Surprise element
+            const surpriseBtn = document.getElementById('easterEggBtn');
+
+            notifPanel.style.display = 'none';
+
+            // MAIN PROCESS SIMULATION (4 secs approx)
+            function runAmazingProcess() {
+                processDiv.classList.add('active');
+                let progress = 0;
+                const totalDuration = 4000; // 4 seconds
+                const stepInterval = 35; // update progress every 35ms
+                let incrementPerStep = (100 / (totalDuration / stepInterval));
+                
+                // Dynamic steps content
+                const steps = [
+                    { title: "🛸 स्कैनिंग क्रेडेंशियल्स", desc: "बायोमेट्रिक प्रमाणीकरण", emoji: "🛡️" },
+                    { title: "✨ दृष्टि सर्वर से हैंडशेक", desc: "एन्क्रिप्टेड कनेक्शन", emoji: "🔐" },
+                    { title: "📡 BPSC डेटाबेस सिंक", desc: "नवीनतम अपडेट लोड", emoji: "⚡" },
+                    { title: "🦋 प्रवेश की अनुमति", desc: "अब स्वागत पृष्ठ खुलेगा", emoji: "🌟" }
+                ];
+                let stepIdx = 0;
+                const stepSwitchTime = 950; // nearly 1 sec per step - 4 steps total 3.8 sec
+            
+                function updateStepUI(index) {
+                    if(index < steps.length) {
+                        processTitleSpan.innerText = steps[index].title;
+                        processDescSpan.innerText = steps[index].desc;
+                        processEmojiSpan.innerText = steps[index].emoji;
+                    }
+                }
+                updateStepUI(0);
+                
+                const progressInterval = setInterval(() => {
+                    progress += incrementPerStep;
+                    if (progress >= 100) {
+                        progress = 100;
+                        progressFillScan.style.width = '100%';
+                        clearInterval(progressInterval);
+                    } else {
+                        progressFillScan.style.width = progress + '%';
+                    }
+                }, stepInterval);
+                
+                const stepRotation = setInterval(() => {
+                    stepIdx++;
+                    if(stepIdx < steps.length) {
+                        updateStepUI(stepIdx);
+                    } else {
+                        clearInterval(stepRotation);
+                    }
+                }, stepSwitchTime);
+                
+                // final finish with closing modal
+                setTimeout(() => {
+                    clearInterval(progressInterval);
+                    clearInterval(stepRotation);
+                    progressFillScan.style.width = '100%';
+                    processTitleSpan.innerText = "✅ सफल प्रवेश";
+                    processDescSpan.innerText = "अब आपका सूचना केंद्र तैयार है";
+                    processEmojiSpan.innerText = "🎉🔥";
+                    setTimeout(() => {
+                        processDiv.classList.remove('active');
+                        homepage.style.display = 'none';
+                        notifPanel.style.display = 'block';
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }, 420);
+                }, totalDuration);
+            }
+
+            startTrigger.addEventListener('click', (e) => {
+                // ripple effect
+                let btn = e.currentTarget;
+                let rippleSpan = document.createElement('span');
+                rippleSpan.style.position = 'absolute';
+                rippleSpan.style.background = 'radial-gradient(circle, #fff, #ffaa66)';
+                rippleSpan.style.borderRadius = '50%';
+                rippleSpan.style.width = '12px';
+                rippleSpan.style.height = '12px';
+                rippleSpan.style.transform = 'scale(0)';
+                rippleSpan.style.pointerEvents = 'none';
+                let rect = btn.getBoundingClientRect();
+                rippleSpan.style.left = (e.clientX - rect.left - 6) + 'px';
+                rippleSpan.style.top = (e.clientY - rect.top - 6) + 'px';
+                rippleSpan.style.transition = 'transform 0.6s, opacity 0.7s';
+                rippleSpan.style.opacity = '0.8';
+                btn.style.position = 'relative';
+                btn.appendChild(rippleSpan);
+                setTimeout(() => {
+                    rippleSpan.style.transform = 'scale(40)';
+                    rippleSpan.style.opacity = '0';
+                    setTimeout(() => rippleSpan.remove(), 700);
+                }, 20);
+                
+                runAmazingProcess();
+            });
+
+            // Extra surprise easter egg functionality
+            if(surpriseBtn) {
+                surpriseBtn.addEventListener('click', () => {
+                    const surpriseDiv = document.createElement('div');
+                    surpriseDiv.innerText = '🦋 शुभकामनाएँ! आपकी मेहनत रंग लाएगी 💯🔥';
+                    surpriseDiv.style.position = 'fixed';
+                    surpriseDiv.style.bottom = '30%';
+                    surpriseDiv.style.left = '50%';
+                    surpriseDiv.style.transform = 'translateX(-50%)';
+                    surpriseDiv.style.background = '#1f2937';
+                    surpriseDiv.style.color = '#ffd966';
+                    surpriseDiv.style.padding = '16px 28px';
+                    surpriseDiv.style.borderRadius = '60px';
+                    surpriseDiv.style.fontWeight = 'bold';
+                    surpriseDiv.style.fontSize = '1.2rem';
+                    surpriseDiv.style.zIndex = '2000';
+                    surpriseDiv.style.backdropFilter = 'blur(8px)';
+                    surpriseDiv.style.border = '1px solid gold';
+                    surpriseDiv.style.boxShadow = '0 10px 25px rgba(0,0,0,0.3)';
+                    surpriseDiv.style.textAlign = 'center';
+                    surpriseDiv.style.whiteSpace = 'nowrap';
+                    document.body.appendChild(surpriseDiv);
+                    setTimeout(() => {
+                        surpriseDiv.style.opacity = '0';
+                        setTimeout(() => surpriseDiv.remove(), 500);
+                    }, 2800);
+                });
+            }
+
+            // add 3d tilt effect to homepage
+            const homeCard = document.querySelector('.homepage');
+            if(homeCard){
+                document.body.addEventListener('mousemove', (e) => {
+                    let xAxis = (window.innerWidth / 2 - e.clientX) / 32;
+                    let yAxis = (window.innerHeight / 2 - e.clientY) / 32;
+                    homeCard.style.transform = `perspective(1200px) rotateY(${xAxis}deg) rotateX(${yAxis * 0.6}deg)`;
+                });
+                document.body.addEventListener('mouseleave', () => {
+                    homeCard.style.transform = `perspective(1200px) rotateY(0deg) rotateX(0deg)`;
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
